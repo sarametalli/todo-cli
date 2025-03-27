@@ -1,10 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="todolist",
     version="0.1",
-    py_modules=["todolist"],
+    packages=find_packages(),
     entry_points={
-        "console_scripts": ["todolist=todolist:main"],
+        "console_scripts": ["todolist=todo_list.cli:main"],
     },
 )
