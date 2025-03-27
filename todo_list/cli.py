@@ -2,7 +2,7 @@
 
 import sys
 
-TODO_FILE = "tasks.txt"
+TODO_FILE = "todo_list/tasks.txt"
 
 def add_task(task):
     with open(TODO_FILE, "a") as f:
