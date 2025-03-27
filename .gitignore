@@ -1,2 +1,3 @@
-todo-list/tasks.txt
 todolist.egg-info/*
+todo_list/__pycache__/*
+tasks.txt
