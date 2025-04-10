@@ -32,7 +32,15 @@ def list_tasks():
     for i, task in enumerate(tasks, 1):
         print(f"{i}. {task.strip()}")
 
-        
+
+def read_completed_tasks():
+    tasks = read_tasks(COMPLETED_FILE)
+    if (not tasks):
+        return
+    print("✅ COMPLETED TASKS:")
+    for i, task in enumerate(tasks, 1):
+        print(f"{i}. {task.strip()}")
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: todolist <add/list> [task]")
@@ -52,8 +60,10 @@ def main():
             print("Error: specify the task number to mark as done")
         else:
             check_task(int(sys.argv[2]))
+    elif command == "completed":
+        read_completed_tasks()
     else:
-        print("Error: unrecognized command. Use 'add' or 'list'")
+        print("Error: unrecognized command. Use 'add', 'list' or 'check'")
         
 if __name__ == "__main__":
     main()
