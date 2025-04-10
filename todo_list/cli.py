@@ -1,13 +1,27 @@
 #!/usr/bin/env python3
 
 import sys
+from .utils import delete_line, write_task
 
 TODO_FILE = "todo_list/tasks.txt"
+COMPLETED_FILE = "todo_list/completed.txt"
+
 
 def add_task(task):
-    with open(TODO_FILE, "a") as f:
-        f.write(task + "\n")
+    write_task(TODO_FILE, task)
     print(f"Added task: {task}")
+
+
+def check_task(task_number):
+    try:
+        with open(TODO_FILE, "r") as f:
+            tasks = f.readlines()
+            if 0 < task_number <= len(tasks):
+                write_task(COMPLETED_FILE, tasks[task_number - 1].strip())
+                delete_line(TODO_FILE, task_number - 1)
+    except Exception as e:
+        print(f"Error: {e}")
+
 
 def list_tasks():
     try:
@@ -36,8 +50,13 @@ def main():
             add_task(" ".join(sys.argv[2:]))
     elif command == "list":
         list_tasks()
+    elif command == "check":
+        if len(sys.argv) < 3:
+            print("Error: specify the task number to mark as done")
+        else:
+            check_task(int(sys.argv[2]))
     else:
         print("Error: unrecognized command. Use 'add' or 'list'")
-
+        
 if __name__ == "__main__":
     main()
