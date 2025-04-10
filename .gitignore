@@ -2,3 +2,4 @@ todolist.egg-info/*
 todo_list/__pycache__/*
 tasks.txt
 .venv/
+todo_list/completed.txt
