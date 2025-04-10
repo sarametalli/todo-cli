@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from .utils import delete_line, write_task
+from .utils import delete_line, write_task, read_tasks
 
 TODO_FILE = "todo_list/tasks.txt"
 COMPLETED_FILE = "todo_list/completed.txt"
@@ -19,24 +19,20 @@ def check_task(task_number):
             if 0 < task_number <= len(tasks):
                 write_task(COMPLETED_FILE, tasks[task_number - 1].strip())
                 delete_line(TODO_FILE, task_number)
-        print(f"Task {task_number} marked as done")
+        print(f"Task {task_number} marked as done") # TODO: add task name
     except Exception as e:
         print(f"Error: {e}")
 
 
 def list_tasks():
-    try:
-        with open(TODO_FILE, "r") as f:
-            tasks = f.readlines()
-        if not tasks:
-            print("Empty list")
-        else:
-            print("📋 TODO LIST:")
-            for i, task in enumerate(tasks, 1):
-                print(f"{i}. {task.strip()}")
-    except FileNotFoundError:
-        print("Empty list")
+    tasks = read_tasks(TODO_FILE)
+    if (not tasks):
+        return
+    print("📋 TODO LIST:")
+    for i, task in enumerate(tasks, 1):
+        print(f"{i}. {task.strip()}")
 
+        
 def main():
     if len(sys.argv) < 2:
         print("Usage: todolist <add/list> [task]")

@@ -10,3 +10,14 @@ def delete_line(filename, line_number):
 def write_task(file, task):
     with open(file, "a") as f:
         f.write(task + "\n")
+
+def read_tasks(filename):
+    try: 
+        with open(filename, 'r') as f:
+            tasks = f.readlines()
+        if not tasks:
+            return 
+        else:
+            return tasks
+    except FileNotFoundError:
+        print("Empty list")
