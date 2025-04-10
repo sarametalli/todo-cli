@@ -18,7 +18,8 @@ def check_task(task_number):
             tasks = f.readlines()
             if 0 < task_number <= len(tasks):
                 write_task(COMPLETED_FILE, tasks[task_number - 1].strip())
-                delete_line(TODO_FILE, task_number - 1)
+                delete_line(TODO_FILE, task_number)
+        print(f"Task {task_number} marked as done")
     except Exception as e:
         print(f"Error: {e}")
 
